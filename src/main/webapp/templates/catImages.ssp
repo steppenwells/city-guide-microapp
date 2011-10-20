@@ -1,0 +1,2 @@
+<%@ import val message: java.lang.String %>
+<h1>${message}</h1>
