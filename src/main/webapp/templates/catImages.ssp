@@ -1,10 +1,14 @@
 <%@ import val data: com.gu.cityguide.CategoryWithItems %>
 <h1>${data.city.name} : ${data.category.name}</h1>
-<ul>
-    #for (item <- data.items)
-    <li>
+<table>
+    #for (row <- data.items)
+    <tr>
+        #for (item <- row)
+        <td>
         <img src="${item.image}" alt="${item.name}" />
         <p>${item.caption}</p>
-    </li>
+        </td>
+        #end
+    </tr>
     #end
-</ul>
+</table>
