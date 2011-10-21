@@ -80,7 +80,7 @@ object CityGuideClient extends JavaNetHttp {
   }
 
   def getCategoryFor(city: String, cat: String): Option[Category] = {
-    val url = cityGuideApiRoot + "/city/" + city
+    val url = cityGuideApiRoot + "/categories/" + city
     val r = GET(url)
     parse(r.body).children.map(_.extract[Category]).toList.find(_.urlName == cat)
   }
