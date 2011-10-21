@@ -44,11 +44,41 @@ class PublicActions extends ScalatraFilter with ScalateSupport {
 
   get("/passnote/*") {
     val path = params("splat")
-    val passnote = ApiClient.item.itemId(path).showFields("all").content.get
-    val body = passnote.fields.get("body")
-    println(body)
-    body
+    //val passnote = ApiClient.item.itemId(path).showFields("all").content.get
+    //val body = passnote.fields.get("body")
+    //println(body)
+    //body
     //layoutTemplate("templates/passnotes.ssp", "passnotes" -> passnotes)
+
+    val paras: List[String] = tempBody.split("<p>").toList.filterNot(_ == "")
+    val protoBlocks = paras map { p =>
+      val c = if(p.contains("<strong>")) {
+        "question"
+      } else {
+        "answer"
+      }
+      ProtoBlock(p, c)
+    }
+
+    val blocks = protoBlocks zipWithIndex
+
+
+    blocks foreach(println)
+
+//    val blocks = paras map { p =>
+//      p -> p.contains("<strong>")
+//    } zipWithIndex map { ((t, b), i) =>
+//
+//      val c = if(b) {
+//        "question"
+//      } else {
+//        "answer"
+//      }
+//      Block(t, c, i)
+//    }
+//
+//    println(blocks)
+
   }
 
   error { case e => {
@@ -62,6 +92,8 @@ class PublicActions extends ScalatraFilter with ScalateSupport {
 }
 
 case class CategoryWithItems(city: City, category: Category, items: List[List[Item]])
+case class ProtoBlock(text: String, c: String)
+case class Block(text: String, c: String, index: Int)
 
 object ApiClient extends Api with JavaNetHttp {
   apiKey = Some("techdev-partner")
