@@ -1,2 +1,10 @@
-<%@ import val message: java.lang.String %>
-<h1>${message}</h1>
+<%@ import val data: com.gu.cityguide.CategoryWithItems %>
+<h1>${data.city.name} : ${data.category.name}</h1>
+<ul>
+    #for (item <- data.items)
+    <li>
+        <img src="${item.image}" alt="${item.name}" />
+        <p>${item.caption}</p>
+    </li>
+    #end
+</ul>

@@ -1,0 +1,11 @@
+<%@ import val passnotes: List[com.gu.openplatform.contentapi.model.Content] %>
+<h1>Past notes</h1>
+<ul>
+    #for (item <- passnotes)
+    <li>
+        <img src="${item.fields.get("thumbnail")}" />
+        <p>${item.fields.get("trailText")}</p>
+        <p>${item.id}</p>
+    </li>
+    #end
+</ul>

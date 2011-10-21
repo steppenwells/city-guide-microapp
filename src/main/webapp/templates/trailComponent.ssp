@@ -1,0 +1,4 @@
+<%@ import val item: com.gu.cityguide.model.Item %>
+<h1>${item.name}</h1>
+<img src="${item.image}" alt="${item.name}" />
+<p>${item.caption}</p>
